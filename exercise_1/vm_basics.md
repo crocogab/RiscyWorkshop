@@ -13,9 +13,21 @@ In this exercise we are going to explore the concept of VM obfuscation.
    clang-20 -O3 -fno-slp-vectorize -std=c++17 minivm.cpp -o minivm
    ```
 2. Run the VM (`./minivm 1 2 3 4`) and do the following exercises:
-   - Extract the active VM bytecode (look at the source code, starting from `main` at the bottom).
+   - Extract the active VM bytecode (look at the source code, starting from `main` at the bottom)
+    07 04 00 01 06 05 02 03 02 06 04 05 01 06
    - How many registers does the VM have in the context?
+   4 (ou 256)
    - Make a list of all available opcodes, their index and what they do.
+   OPCODE:
+     - 0 = label
+     - 1 = retry value of register
+     - 2 = add
+     - 3 = move value from source to dst
+     - 4 = compare 2 values
+     - 5 = jump si condition
+     - 6 = XOR 2 bytes
+     - 7 = OR
+     - 8 = multiplication
    - What does the active VM bytecode do? Write it as C pseudocode.
 3. For this exercise you will write your own bytecode. Look at the commented-out example code to figure out how to do it.
    - Implement a function that adds the first two arguments together: `return a + b`
