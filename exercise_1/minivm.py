@@ -139,7 +139,11 @@ def execute_bytecode(preprocessor: VMPreprocessor, r0: int, r1: int, r2: int, r3
 def main():
     # Parse arguments
     parser = argparse.ArgumentParser(description="Mini Virtual Machine - Python Port")
+
+    #represente le code que on va executer
     parser.add_argument("--bytecode", type=str, help="Hex string of bytecode", default="07 04 00 01 06 05 02 03 02 06 04 05 01 06")
+
+    #données des registres -> donnes que on va executer
     parser.add_argument("inputs", nargs="*", type=int, help="Initial register values (max 4)")
     args = parser.parse_args()
 
@@ -157,6 +161,9 @@ def main():
     result = execute_bytecode(preprocessor, inputs[0], inputs[1], inputs[2], inputs[3])
     result = struct.unpack('<q', struct.pack('<Q', result))[0]
     print(f"result: {result}")
+
+    # Si on veut faire 2+3. On mets 2 dans r0, 3 dans r1. Puis on appelle add r2, r0,r1
+    # donc bytecode = 02 03 00 01 01 03
 
 if __name__ == "__main__":
     sys.exit(main())
